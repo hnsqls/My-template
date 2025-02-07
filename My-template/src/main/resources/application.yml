@@ -1,0 +1,54 @@
+
+spring:
+  application:
+    name: My-template # {应用名称}
+  # 默认 dev 环境
+  profiles:
+    active: dev
+
+
+  # 支持 swagger3
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+
+  # 数据库配置
+  # todo 需替换配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/My_template
+    username: root
+    password: root
+
+# mybatis-plus 配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
+      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
+
+# 接口文档配置 http://localhost:8080/api/doc.html
+knife4j:
+  enable: true  # 启用 Knife4j
+  openapi:
+    title: "接口文档"  # 设置文档标题
+    version: "1.0"  # 设置文档版本
+    group:
+      default:  # 默认组配置
+        api-rule: package  # 按照包扫描规则生成文档
+        api-rule-resources:
+          - com.ls.template.controller  # 要扫描的包路径，通常是你的控制器所在的包
+
+# 服务配置
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+
+
